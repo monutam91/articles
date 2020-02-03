@@ -83,3 +83,66 @@ This description is really misleading, since it's suggesting that the "===" is m
 So in reality, the "==" is doing more work, than the "===" operator. This may lead to you to an other trap, that the "==" is less perfomant, than the "===" operator. Altough, there is a small measurable cost of the coercion, we are talking about mere microseconds. (Yes, microseconds, not mlliseconds, that is millionths of a second)
 
 When you are comparing two values of the same types, then there is no difference in the "===" and the "==" operators. They are using the same algorithm under the hood, other than minor differences in engine implementation.
+
+### The "==" operator or Abstract Equality
+
+The behavior of the "==" operator is defined as the "Abstract Equality Comparison Algorithm". The section of ES5 spec. where this is specified contains a comprehensive, but simple algorithm which states how the coercion is working on every possible types.
+
+A lot of confusion is coming from this part of the JavaScript ecosystem. Generally, this is said to be too complex and too unintuitive to use, and prone to make more bugs, than enabling better readability.
+
+Let's go through the above mentioned algorithm from top to bottom (as it is in the ES5 specs).
+
+The first two points are generally saying, that if the values to be compared are of the same type, so there is no need to coerce the values, then theay are simply compared via identity. So, 42 only equals to 42 and "abc" to "abc". Just like you would expect (from "===").
+
+There are some minor exceptions, however:
+ - NaN is never equals to itself
+ - +0 and -0 are equal to each other
+
+Also, to sum up the simple parts. Loose equality comparison with objects (including functions and arrays) are only true if they are referencing the same values.
+
+Now, walk through the (not much more) complicated parts of this algorithm. These are specifiying, that if you compare values of different types one or both of the values need to be (implicitly) coerced.
+
+**Comparing string to number**
+```js
+var x = 42;
+var y = "42";
+
+x === y;    // false
+x == y;     // true
+y == x;     // true
+```
+
+As the ES5 spec, clauses 11.9.3.4-5 say:
+> 4. If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).
+> 5. If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x) == y.
+
+So, if one of the values are string and the other is number, then the string will be coerced to number, then regular comparison will be done.
+
+So, in the above example, the value "42" will be coerced to the number 42. Which is obviously equals to x.
+
+**Comparing *anything* to boolean**
+Let's start with an example:
+
+```js
+var x = "42";
+var y = true;
+var z = false;
+
+x == y;     // false
+y == z;     // false
+```
+
+You may be surprised by this, because at the start of this article we stated that the "42" value, because it is not listed as falsy, is truthy. So, then you might think that here: `"42" == true` should be true. Let's see what the ES5 spec say about this.
+
+> 6. If Type(x) is Boolean, return the result of the comparison ToNumber(x) == y.
+> 7. If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).
+
+So, if one of the values are booleans, then it will be coerced to a number. Let's go through the example above:
+
+The type of y is boolean, so it will be coerced to a number. Since it is true, then it will be coerced to 1. However, the types of the values are still different, but this time we are comparing a number to a string. Thus, the string will be coerced to the number 42. Since 1 is obviously not equals to 42 the result will be false.
+
+As you could guess it, the result of the second comparison will still be false, because the false will be coerced to the number 0. Okay, wait a second here. This means that "42" is neither == false nor == true. But how can a value be neither truthy nor falsy?
+
+It is because you're brain tricks you. If you read the ES5 specs again you will realize, that there is no boolean coercion here at all. Instead the boolean value will be coerced to a number.
+
+Because of this, you should avoid using `x == false` or `x == true` or if you know that one of the types will be boolean, while the other might be of an other type. In practice this will almost always introduce some bugs later on. 
