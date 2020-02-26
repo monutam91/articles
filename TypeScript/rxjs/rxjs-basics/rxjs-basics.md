@@ -15,13 +15,13 @@ The Reactive Extensions lies on several foundations, basic concepts which it is 
 
 ### Observer pattern
 
-The Observer pattern is a design pattern, which the Rx "simply" implements. Since this pattern is one of the main cornerstone of Rx, I'd like to talk about it a bit.
+The Observer pattern is a design pattern, which the Rx "simply" implements. Since this pattern is one of the main cornerstones of Rx, I'd like to talk about it a bit.
 
 Fortunately, we can find a really good definition of the pattern on [Wikipedia](https://en.wikipedia.org/wiki/Observer_pattern).
 
 > The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
-So basically we have things which we want to Observe. We want to be notified when some change is happening on that _thing_. Let's say we have a button, and we want to listen to its click events. The solution is simple, you would say, 'Just listen to the click event, and put a callback on it'. Of course, it is easy, but what if in our system we associate this click to some higher-level event? Take a login form, for example, you will have a submit button on that form, that will try to authenticate the user with the given information. Afterward, you will navigate the user to some other page, so that he/she can use your awesome application. Inside this application however, we need to get a hold of our User object, which contains basic info about our user. You can see in this example, that a basic click event now, corresponds to a higher-level 'login event'. There will be several parts of your application that will be interested in this event, like guards in on your routes, or components which are showing user infos, or services that might want to send some userID or some token with every request the user makes to the server to authorize the user.
+So basically we have things which we want to Observe. We want to be notified when some change is happening on that _thing_. Let's say we have a button, and we want to listen to its click events. The solution is simple, you would say, 'Just listen to the click event, and put a callback on it'. Of course, it is easy, but what if in our system we associate this click to some higher-level event? Take a login form, for example, you will have a submit button on that form, that will try to authenticate the user with the given information. Afterward, you will navigate the user to some other page, so that he/she can use your awesome application. Inside this application, however, we need to get a hold of our User object, which contains basic info about our user. You can see in this example, that a basic click event now, corresponds to a higher-level 'login event'. There will be several parts of your application that will be interested in this event, like guards in on your routes, or components which are showing user infos, or services that might want to send some userID or some token with every request the user makes to the server to authorize the user.
 
 This would still be quite easy since you could just create a service, which can store the user object and can also give it to other interested components inside your application.
 
@@ -35,7 +35,7 @@ First, look at the definition of this paradigm, again we can check out Wikipedia
 
 > Functional programming is a programming paradigm — a style of building the structure and elements of computer programs — that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. It is a declarative programming paradigm in that programming is done with expressions or declarations[1] instead of statements.
 
-So basically we write our function as you may have seen mathemathical functions in High school. For example: `f(g(x))` this expression states that we do 'g', then on the results of 'g' we run 'f'. So **we're stating what we do** instead of how we're going to do it. The imperative could be something like:
+So basically we write our function as you may have seen mathematical functions in High school. For example: `f(g(x))` this expression states that we do 'g', then on the results of 'g' we run 'f'. So **we're stating what we do** instead of how we're going to do it. The imperative could be something like:
 
     - Take x, and calculate the square of its value
     - Given the square of x, negate it
@@ -132,7 +132,7 @@ An 'X' on the timeline marks an error emitted by the Observable. No more value w
     </p>
 </div>
 
-Since we said that both Promises and Observables are handling asynchronous task, you might wondering what is the difference between them. So let's go through them quickly. I summerized them in a table, so you can easily grasp it.
+Since we said that both Promises and Observables are handling asynchronous tasks, you might be wondering what is the difference between them. So let's go through them quickly. I summarized them in a table, so you can easily grasp it.
 
 |        Promise         |     Observable      |
 | :--------------------: | :-----------------: |
