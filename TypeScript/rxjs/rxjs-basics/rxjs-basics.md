@@ -107,7 +107,7 @@ Okay, at this point in the article, we can push new items inside subjects, and w
 
 Since the main part as a developer who just started to learn Rx will be to read the docs about the operators, let's see how you can read the essential piece of RxJS documentation, the marbles.
 
-> To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. Marble Diagrams are visual representations of how operators work, and include the input Observable(s), the operator and its parameters, and the output Observable.
+> To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. Marble Diagrams are visual representations of how operators work and include the input Observable(s), the operator and its parameters, and the output Observable.
 
 To explain the marble diagrams, let me just throw in the definition and the example of a marble diagram from RxJS's documentation.
 
