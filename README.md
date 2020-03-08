@@ -1,2 +1,2 @@
 # articles
-This repository containes any article written by me. Primarily programming related talks.
+This repository contains every article written by me. Primarily programming-related talks.
