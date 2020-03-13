@@ -1,6 +1,6 @@
 # RxJS Basics
 
-This article is yet another tutorial like writing about Rx and mainly RxJS. I've written this article to help my colleagues learn the basics of Rx. I know there are several other writings, tutorials and writings already on this topic, but since I had to summarize them either way, I may also just make this a public article, and I might help some of the devs out there as well. Furthermore, I like to read Rx over and over, to deepen my knowledge as well.
+I am starting to write a series of articles about RxJS. First things first, let's go through the basics. What are the basic concepts which RxJS is built upon? We will go through the Observer pattern, the basics of Functional Programming and then take on the basics of RxJS.
 
 ## The foundations of Rx
 
@@ -123,7 +123,7 @@ The box between the input and output Observables are representing the operator i
 
 An 'X' on the timeline marks an error emitted by the Observable. No more value will be delivered thereafter.
 
-## Difference between OBservables and Promises
+## Difference between Observables and Promises
 
 <div align="center">
     <img src="./assets/promise-stock.jpg" />
