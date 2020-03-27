@@ -132,67 +132,7 @@ The last operator which I want to mention in this article is the `defer`. Let's 
 
 > Creates the Observable lazily, that is, only when it is subscribed.
 
-### Hot stuff!!
-
-<div align="center">
-    <img src="./assets/hot-stuff-stock.jpg" />
-    <p>
-        Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=691939">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=691939">Pixabay</a>
-    </p>
-</div>
-
-Okay, so what does this mean, and when we should use it. As I said in the previous article Observables are lazy, so they will only ever do something when somebody subscribes to them when somebody is interested. If we're going forward on this, then that means, that you cannot miss any item emitted by an Observable, since they will only emit something if you subscribe to it. However, this is not true in every case. Check out the following example:
-
-```ts
-const subject = new Subject<number>();
-subject.next(1);
-
-// Here the console.log will never run since we missed the next on the subject
-const subscription = subject.subscribe(val => console.log(val));
-```
-
-As you can see, we will miss the first next event on the subject. What's the matter then, with this whole lazy thing of the Observable. As we already know, an Observable is an asynchronous data stream. We can listen to this data stream for data, but something needs to _produce_ these items. This something is called the **producer** of the Observable. For example in the case of the 'of' creational operator it is the parameter given to it or in case of the 'from' operator it can be the promise which we passed to it.
-
-To simplify this even more, Observables are functions, their job is to tie an observer to a producer. If we're moving forward with this, we can also realize, that since an Observable is just a function, with one job, they don't necessarily set up the producer. Their only task is to notify the observer whenever the producer makes some new data.
-
-We can divide the Observables into two categories by their producer. It can be a _Hot_ or a _Cold_ Observable.
-
-**We call an Observable Cold if the producer of it is created or activated during subscription. Let's check out a basic example by creating an Observable with its constructor.**
-
-```ts
-const timer$ = new Observable(observer => {
-  let index = 0;
-  const intervalToken = setInterval(() => observer.next(index++), 1000);
-
-  return () => clearInterval(intervalToken);
-});
-
-timer$.subscribe(value => console.log(value));
-// 1
-// 2
-// 3
-// ...
-```
-
-The above code will print a sequence of numbers one by one every second. The important part here is the function which we're giving to Observable's constructor. This parameter is called 'subscribe' inside Rx's type definition. Whenever somebody subscribes to an Observable this method will be called and this method is responsible for tying the producer to the observer. In the above example, we're creating the interval in this function, so we're creating and activating the producer of our Observable during subscription. Since this interval hasn't existed before we subscribed to this Observable, we can be sure that we aren't missing any data emitted by the Observable. To put it simply, we're lazily creating our producer.
-
-Now, let's see an example of a hot Observable.
-
-```ts
-const ws = new WebSocket("ws://my-awesome-websocket");
-
-const hot$ = new Observable(observer => {
-  ws.addEventListener("message", e => observer.next(e));
-});
-```
-
-Here, the producer is the WebSocket, but the twist here is that we aren't creating this WebSocket, the producer, during subscription. Instead, we're using a reference of the producer, so the producer already exists it may even emitted messages already. In the case of this WebSocket example, it is even better like this, since you don't want to create a new WebSocket connection every time someone is subscribing to your Observable. However, in this case, when you subscribe to the Observable, you may already miss some 'next' notifications.
-
-However, one flaw of the above example is that we don't have any TearDown logic to close our WebSocket connection. In a real-world application, you would create a Cold Observable for your WebSocket connection and make this cold observable hot and make others subscribe to this hot Observable. RxJS provides several operators to make a Cold Observable Hot, but we're going to cover them later in this series.
-
-### Back to the 'defer' operator
-
-After our "little" detour with Hot and Cold Observables, let's get back to the 'defer' operator. As the description said, we can use this operator to create an Observable lazily. It can be useful for example when you're working with Promises. Since as we said in the previous article, the Promises are not lazy. Whenever you create a Promise it will run, even if there aren't any then calls on it. 'defer' operation to the rescue:
+As the description said, we can use this operator to create an Observable lazily. It can be useful for example when you're working with Promises. Since as we said in the previous article, the Promises are not lazy, whenever you create a Promise it will run, even if there aren't any `then` calls on it. 'defer' operator to the rescue:
 
 ```ts
 @Injectable()
@@ -217,4 +157,8 @@ new Observable(observer => {
 });
 ```
 
-Thank you for everyone, who helped me to create this article! I am open to any constructive criticism and bug reports regarding my articles. Please, feel free to contact me! :)
+## Summary
+
+In this article we went through the basic creational operators. I also tried to give concise examples regarding their usage. I hope it helped some of you.
+
+Please feel free to leave any suggestions or comments regarding my story. I am also open to new things to improve or learn. Furthermore, I am open to any suggestions regarding my future stories in any topics related to web Development, JavaScript or Angular.
