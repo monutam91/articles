@@ -5,9 +5,14 @@
     "projects": {
         "card-list": {
             "projectType": "library",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
             "root": "projects/card-list",
             "sourceRoot": "projects/card-list/src",
-            "prefix": "lib",
+            "prefix": "griff",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",
@@ -47,7 +52,7 @@
             },
             "root": "projects/card-list-example",
             "sourceRoot": "projects/card-list-example/src",
-            "prefix": "app",
+            "prefix": "griff",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
