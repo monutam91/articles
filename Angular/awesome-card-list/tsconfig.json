@@ -5,22 +5,22 @@
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/card-list/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/card-list/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/card-list-example/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/card-list-example/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/card-list-example/e2e/tsconfig.json"
-    }
-]
+    "files": [],
+    "references": [
+        {
+            "path": "./projects/card-list/tsconfig.lib.json"
+        },
+        {
+            "path": "./projects/card-list/tsconfig.spec.json"
+        },
+        {
+            "path": "./projects/card-list-example/tsconfig.app.json"
+        },
+        {
+            "path": "./projects/card-list-example/tsconfig.spec.json"
+        },
+        {
+            "path": "./projects/card-list-example/e2e/tsconfig.json"
+        }
+    ]
 }
