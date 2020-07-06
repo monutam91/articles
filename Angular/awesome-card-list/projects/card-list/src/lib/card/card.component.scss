@@ -1,0 +1,19 @@
+:host {
+    display: block;
+
+    /*
+       Define default styles here,
+       so users of this component can easily change them later
+    */
+    color: blue;
+
+    .griff-card {
+        /*
+            Encapsulated styling come here
+        */
+        display: block;
+
+        // Use inherit to enable to use defaults defined on the host element
+        color: inherit;
+    }
+}

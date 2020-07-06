@@ -13,7 +13,7 @@
         "module": "es2020",
         "lib": ["es2018", "dom"],
         "paths": {
-            "card-list": ["dist/card-list/card-list", "dist/card-list"]
+            "@griff/card-list": ["projects/card-list/src/public-api"]
         }
     }
 }
