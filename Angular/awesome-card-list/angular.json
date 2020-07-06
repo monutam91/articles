@@ -1,0 +1,157 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "card-list": {
+            "projectType": "library",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/card-list",
+            "sourceRoot": "projects/card-list/src",
+            "prefix": "griff",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/card-list/tsconfig.lib.json",
+                        "project": "projects/card-list/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/card-list/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/card-list/src/test.ts",
+                        "tsConfig": "projects/card-list/tsconfig.spec.json",
+                        "karmaConfig": "projects/card-list/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["projects/card-list/tsconfig.lib.json", "projects/card-list/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "card-list-example": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/card-list-example",
+            "sourceRoot": "projects/card-list-example/src",
+            "prefix": "griff",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/card-list-example",
+                        "index": "projects/card-list-example/src/index.html",
+                        "main": "projects/card-list-example/src/main.ts",
+                        "polyfills": "projects/card-list-example/src/polyfills.ts",
+                        "tsConfig": "projects/card-list-example/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["projects/card-list-example/src/favicon.ico", "projects/card-list-example/src/assets"],
+                        "styles": ["projects/card-list-example/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/card-list-example/src/environments/environment.ts",
+                                    "with": "projects/card-list-example/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "card-list-example:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "card-list-example:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "card-list-example:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/card-list-example/src/test.ts",
+                        "polyfills": "projects/card-list-example/src/polyfills.ts",
+                        "tsConfig": "projects/card-list-example/tsconfig.spec.json",
+                        "karmaConfig": "projects/card-list-example/karma.conf.js",
+                        "assets": ["projects/card-list-example/src/favicon.ico", "projects/card-list-example/src/assets"],
+                        "styles": ["projects/card-list-example/src/styles.scss"],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/card-list-example/tsconfig.app.json",
+                            "projects/card-list-example/tsconfig.spec.json",
+                            "projects/card-list-example/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/card-list-example/e2e/protractor.conf.js",
+                        "devServerTarget": "card-list-example:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "card-list-example:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "card-list"
+}

@@ -1,0 +1,18 @@
+:host {
+    .griff-card-list-example {
+        display: flex;
+        flex-direction: column;
+
+        griff-card {
+            margin: 5px;
+        }
+
+        .red {
+            color: red;
+
+            [griff-card-tool] {
+                border: solid 2px #3624d1;
+            }
+        }
+    }
+}

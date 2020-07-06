@@ -1,0 +1,50 @@
+:host {
+    display: block;
+
+    /*
+       Define default styles here,
+       so users of this component can easily change them later
+    */
+    color: #000;
+    background-color: #c1e0b9;
+
+    .griff-card {
+        /*
+            Encapsulated styling come here
+        */
+        display: flex;
+        flex-direction: column;
+
+        height: 100%;
+
+        // Use inherit to enable to use defaults defined on the host element
+        // This example is actually wrong, because the color is inherited by default
+        color: inherit;
+
+        .griff-card-title {
+            display: flex;
+            justify-content: center;
+
+            &:not(:empty) {
+                padding: 25px 5px;
+                border-bottom: dashed black 1px;
+            }
+        }
+
+        .griff-card-content {
+            &:not(:empty) {
+                padding: 10px 5px;
+            }
+        }
+
+        .griff-card-tools {
+            display: flex;
+            justify-content: flex-end;
+
+            &:not(:empty) {
+                padding: 5px;
+                border-top: dashed black 1px;
+            }
+        }
+    }
+}

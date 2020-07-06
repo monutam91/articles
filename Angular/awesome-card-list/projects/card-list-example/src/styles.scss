@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+    box-sizing: border-box;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    griff-card {
+        [griff-card-tool] {
+            background-color: transparent;
+            border-radius: 10px;
+            border: solid 1px #e2001a;
+
+            margin: 5px;
+        }
+    }
+}
