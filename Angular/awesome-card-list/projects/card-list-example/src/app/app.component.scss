@@ -9,6 +9,10 @@
 
         .red {
             color: red;
+
+            [griff-card-tool] {
+                border: solid 2px #3624d1;
+            }
         }
     }
 }

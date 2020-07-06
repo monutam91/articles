@@ -36,5 +36,15 @@
                 padding: 10px 5px;
             }
         }
+
+        .griff-card-tools {
+            display: flex;
+            justify-content: flex-end;
+
+            &:not(:empty) {
+                padding: 5px;
+                border-top: dashed black 1px;
+            }
+        }
     }
 }
