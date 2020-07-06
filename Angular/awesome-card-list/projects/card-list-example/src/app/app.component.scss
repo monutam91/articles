@@ -1,5 +1,12 @@
 :host {
     .griff-card-list-example {
+        display: flex;
+        flex-direction: column;
+
+        griff-card {
+            margin: 5px;
+        }
+
         .red {
             color: red;
         }
