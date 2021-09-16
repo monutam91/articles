@@ -4,7 +4,7 @@ import { TestScheduler } from 'rxjs/testing';
 
 import { SwitchMapComponent } from './switch-map.component';
 
-fdescribe('SwitchMapComponent', () => {
+describe('SwitchMapComponent', () => {
   let component: SwitchMapComponent;
   let fixture: ComponentFixture<SwitchMapComponent>;
   let testScheduler: TestScheduler;
