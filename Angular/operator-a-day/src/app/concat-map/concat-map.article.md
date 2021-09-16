@@ -1,5 +1,5 @@
 # The Operator of the Day: The concatMap
-### It'll keep the bugs away!
+It'll keep the bugs away!
 
 ## Intro
 
